@@ -25,7 +25,7 @@ func main() {
 
 	err := http.ListenAndServe(cfg.HTTPServer.Addr, mux)
     if err != nil {
-        log.Fatal(err)
+        log.Fatal("error starting http server : %s", err)
     }
 
 	fmt.Println("Server started on port 8080")
