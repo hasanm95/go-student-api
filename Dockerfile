@@ -17,7 +17,7 @@ RUN go mod download
 COPY . .
 
 # Build the application
-RUN go build -o main main.go
+RUN go build -o main main.go 
 
 
 # Expose port

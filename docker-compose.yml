@@ -12,6 +12,7 @@ services:
       - sqlite-data:/app/data
     environment:
       - DB_PATH=/app/data/database.sqlite
+      - CONFIG_PATH=/app/config/local.yaml
     depends_on:
       - sqlite
 
