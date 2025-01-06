@@ -27,3 +27,5 @@ go.work.sum
 
 # Temporary files
 temp/
+/data
+/config
