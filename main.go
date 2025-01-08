@@ -11,11 +11,9 @@ import (
 	"log/slog"
 
 	"github.com/hasanm95/go-student-api/internal/config"
-)
+	"github.com/hasanm95/go-student-api/internal/http/handlers/student"
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Welcome to the Student API!!!!!!!!!!!!!!!!!!!"))
-}
+)
 
 func main() {
 	// Load config from file
@@ -24,7 +22,7 @@ func main() {
 
 	// Setup router
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", handler)
+	mux.HandleFunc("POST /api/students", student.New())
 	slog.Info("server started on port", slog.String("address", cfg.HTTPServer.Addr))
 
 	done := make(chan os.Signal, 1)
