@@ -11,16 +11,8 @@ services:
       - .:/app
       - sqlite-data:/app/data
     environment:
-      - DB_PATH=/app/data/database.sqlite
       - CONFIG_PATH=/app/config/local.yaml
-    depends_on:
-      - sqlite
-
-  sqlite:
-    image: keinos/sqlite3:latest
-    volumes:
-      - sqlite-data:/data
-    command: ["tail", "-f", "/dev/null"]  # Keeps container running
+      - DB_PATH=/app/data/database.sqlite
 
 volumes:
   sqlite-data:

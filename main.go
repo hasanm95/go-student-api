@@ -12,6 +12,7 @@ import (
 
 	"github.com/hasanm95/go-student-api/internal/config"
 	"github.com/hasanm95/go-student-api/internal/http/handlers/student"
+	"github.com/hasanm95/go-student-api/internal/storage/sqlite"
 
 )
 
@@ -19,10 +20,17 @@ func main() {
 	// Load config from file
 	cfg := config.MustLoad()
 
+	// Initialize database
+	storage, err := sqlite.New(cfg.StoragePath)
+	if err != nil {
+		log.Fatalf("failed to initialize storage: %s", err)
+	}
 
 	// Setup router
 	mux := http.NewServeMux()
-	mux.HandleFunc("POST /api/students", student.New())
+	mux.HandleFunc("POST /api/students", student.New(storage))
+	mux.HandleFunc("GET /api/students/{id}", student.GetStudentById(storage))
+	mux.HandleFunc("GET /api/students", student.GetStudents(storage))
 	slog.Info("server started on port", slog.String("address", cfg.HTTPServer.Addr))
 
 	done := make(chan os.Signal, 1)

@@ -30,3 +30,4 @@ tmp/
 tmp/*
 /data
 /config
+data/*.sqlite
